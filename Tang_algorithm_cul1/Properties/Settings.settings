@@ -1,7 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tang_algorithm_cul1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="code" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">순번</Value>
+    </Setting>
+    <Setting Name="name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">이름</Value>
+    </Setting>
+    <Setting Name="age" Type="System.String" Scope="User">
+      <Value Profile="(Default)">나이</Value>
+    </Setting>
+    <Setting Name="tra_str" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">특성 목록</Value>
+    </Setting>
+    <Setting Name="stat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">상태</Value>
+    </Setting>
+    <Setting Name="dice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dice</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

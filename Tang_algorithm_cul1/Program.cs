@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,13 +23,24 @@ namespace Tang_algorithm_cul1
             Application.Run(new Form1());
         }
     }
+    public class PersonList : ObservableCollection<Person> 
+    { 
+        public PersonList(List<Person>persons) 
+        {
+            foreach(Person person in persons) 
+            {
+                Add(person);
+            }
+        }
+    }
     public class Person 
     {
-        public string name;
-        public int age;
-        public string[] traits;
-        public int st_die;
-        public JObject book;
+        public string name { get; set; }
+        public int age { get; set; }
+        public string[] traits { get; set; }
+        public int st_die { get; set; }
+        public JObject book { get; set; }
+        public int dicek { get; set; }
 
         public Person(string _name, int _age , string[] _trait,int _st_die,JObject keyValues) 
         { 
@@ -38,27 +50,42 @@ namespace Tang_algorithm_cul1
             this.st_die = _st_die;
             this.book = keyValues;
         }
-        public int dice()
+        public int dice(bool mode)
         {
-            if (this.st_die == 0) return 0 ;
+            if (this.st_die == 0 && !mode) return 0 ;
             int age = this.age;
-            int die;
+            
 
 
+            /*if (Array.IndexOf(traits, "") != -1) 
+            {
 
+            }*/
+            JArray diepercent = (JArray)book["die_probability"];
+            JArray dieage = (JArray)book["die_age"];
+            int die = (int)diepercent[diepercent.Count-1];
+            if (!mode)this.age += 1;
             Random rand = new Random();
             int dicef = rand.Next(0, 100);
-            if (age < 55) die = 5;
-            else if (age < 75) die = (age - 54) * 3;
-            else die = 65;
+            int dis = (int)book["disease"];
+            for (int i =0; i< dieage.Count; i++) 
+            {
+                if (age < (int)dieage[i]) 
+                {
+                    die = (int)diepercent[i];
+                    break;
+                }
+
+            }
             foreach(string tra in this.traits) 
             {
                 if (tra == null) { continue; }
                 die += (int)this.book["trait"][tra];
             }
-            if (dicef > die + 10) this.st_die = 2;
+            if (dicef > die + dis) this.st_die = 2;
             else if (dicef > die) this.st_die = 1;
             else this.st_die = 0;
+            this.dicek = dicef;
             return dicef;
         }
        

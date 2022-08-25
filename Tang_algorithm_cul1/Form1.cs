@@ -5,11 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 
 
@@ -24,7 +28,15 @@ namespace Tang_algorithm_cul1
         List<Person> persons_g;
         private void Form1_Load(object sender, EventArgs e)
         {
+            turncount.Text = counter.ToString();
             string data_path = @"./data.json";
+            string trait_path = @"./trait.json";
+            JObject keyValues = new JObject();  
+            using (StreamReader file2 = File.OpenText(trait_path))
+            using (JsonTextReader reader = new JsonTextReader(file2))
+            {
+                keyValues = (JObject)JToken.ReadFrom(reader);
+            }
             using (StreamReader file= File.OpenText(data_path))
             using(JsonTextReader reader= new JsonTextReader(file)) 
             {
@@ -36,7 +48,7 @@ namespace Tang_algorithm_cul1
                 {
                     JArray ja = (JArray)k["trait"];
                     Person person = 
-                        new Person(k["name"].ToString(),(int)k["age"], ja.ToObject<string[]>(),(int)k["die"]);
+                        new Person(k["name"].ToString(),(int)k["age"], ja.ToObject<string[]>(),(int)k["die"], keyValues);
                     persons.Add(person);
                 }
                 persons_g = persons;
@@ -50,7 +62,7 @@ namespace Tang_algorithm_cul1
                     {
                         tras += tr + ",";
                     }
-                    tras = tras.Substring(0, tras.Length- 1);
+                    if(tras.Length>1)tras = tras.Substring(0, tras.Length- 1);
                     string alive = "";
                     switch (human.st_die) 
                     {
@@ -80,6 +92,107 @@ namespace Tang_algorithm_cul1
 
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void skipbtn_Click(object sender, EventArgs e)
+        {
+            listView.Items.Clear();
+            listView.BeginUpdate();
+            int code = 1;
+            foreach (Person per in persons_g) 
+            {
+                int l = per.dice();
+                Thread.Sleep(2);
+                ListViewItem item = new ListViewItem(code.ToString());
+                string tras = "";
+                foreach (string tr in per.traits)
+                {
+                    tras += tr + ",";
+                }
+                if(tras.Length>0)tras = tras.Substring(0, tras.Length - 1);
+                string alive = "";
+                switch (per.st_die)
+                {
+                    case 0: alive = "사망"; break;
+                    case 1: alive = "병치레"; break;
+                    case 2: alive = "생존"; break;
+                }
+                item.SubItems.Add(per.name);
+                item.SubItems.Add(per.age.ToString());
+                item.SubItems.Add(tras);
+                item.SubItems.Add(alive);
+                item.SubItems.Add(l.ToString());
+                listView.Items.Add(item);
+                code++;
+            }
+            listView.EndUpdate();
+            counter++;
+            turncount.Text = counter.ToString();
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string st = "";
+            foreach(Person per in persons_g) 
+            {
+                string alive="";
+                string tras = "";
+                foreach (string tr in per.traits)
+                {
+                    tras += tr + ",";
+                }
+                if(tras.Length>0) tras = tras.Substring(0, tras.Length - 1);
+                
+                switch (per.st_die)
+                {
+                    case 0: alive = "사망"; break;
+                    case 1: alive = "병치레"; break;
+                    case 2: alive = "생존"; break;
+                
+                }
+                st += "이름 : " + per.name + "(나이: " + per.age.ToString() + ") [특성 : " + tras + "] 상황 : "+alive+"\n";
+            }
+            Report page = new Report(st, counter);
+            page.Show();
+        }
+        int counter = 0;
+
+        private void turncount_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void loadbtn_Click(object sender, EventArgs e)
+        {
+            string data_path = @"./data.json";
+            if (System.IO.File.Exists(data_path))
+            {
+                System.IO.File.Delete(data_path);
+            }
+            JObject returnobj = new JObject();
+            JArray returnarr = new JArray();
+            foreach(Person per in persons_g)
+            {
+                JObject persona = new JObject();
+                persona.Add("name", per.name.ToString());
+                persona.Add("age", per.age.ToString());
+                JArray tras = new JArray();
+                foreach(string trs in per.traits) 
+                {
+                    tras.Add(trs);
+                }
+                persona.Add("trait", tras);
+                persona.Add("die", per.st_die.ToString());
+                returnarr.Add(persona);
+            }
+            returnobj.Add("data", returnarr);
+            string retu_str = returnobj.ToString();
+            System.IO.File.WriteAllText(data_path, retu_str);
+
+
 
         }
     }

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Tang_algorithm_cul1.exe" version="1.0.0.0" publicKeyToken="5f10963eb3bd3b34" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Tang_algorithm_cul1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Tang_algorithm_cul1.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 매니페스트 옵션
+          Windows 사용자 계정 컨트롤 수준을 변경하려면 
+          requestedExecutionLevel 노드를 다음 중 하나로 바꾸세요.
+
+          <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+          <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+          <requestedExecutionLevel level="highestAvailable" uiAccess="false" />
+
+          이전 버전과의 호환성을 위해 파일 및 레지스트리 가상화를 사용하려면 
+          requestedExecutionLevel 노드를 삭제하세요.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="701992">
+      <assemblyIdentity name="Newtonsoft.Json" version="13.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>tiSUnfiw46YVP9+3MKfG9JkLZZLuDZIuF4hDPSdmEPM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tang_algorithm_cul1.exe" size="16360">
+      <assemblyIdentity name="Tang_algorithm_cul1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>lvXJyMW91lDzzjzqxwku+4ZoHgoMolvLZ4NR3n+r7qo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Tang_algorithm_cul1.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+CM46OnHRrXZXNLMx7+U3V3iubiYL//d8hGOR13lDhU=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=CANARD-DESKTOP-\CANARD" issuerKeyHash="0b0e382b12ca4cf58333ff3177560448dabfc624" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>4n2WlyYLh8Nqalrq5p1A7M3tcWCIAtENgetIpVtlfBE=</DigestValue></Reference></SignedInfo><SignatureValue>t7kZGDGLhHmEKp6kGKpBlPdSHNnwu8HsT7P0lUWOUVMavQ4JVewjBOoO5BAbfm8Wbdxx00JJMVMs7JrSsZ+NeycuicRPTRrisCsmsYAhAVsrGHycRvpbDrEmvhY3kJxCXb6P8PkFMOU4oohs0ajs5L42seH0e19Cx7N57GMCgB4=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>1gLXR0ZvNlJlQaflq+h8od90rcBXYTHxAsRGuevnERB1adAScxy9SOj3DeKibpwZ3tL8T+LA/z+A6XoGpS0V/sX4gWTpXjVGAGr4B82tAVNzWa/GVxIFQNTekd2K5Zg36KPI0iDjM1bRXOjtWn8/PbO468g4BlHwKjAakhhVvbE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="117c655ba548eb810dd102886071edcdec409de6ea5a6a6ac3870b2697967de2" Description="" Url=""><as:assemblyIdentity name="Tang_algorithm_cul1.exe" version="1.0.0.0" publicKeyToken="5f10963eb3bd3b34" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=CANARD-DESKTOP-\CANARD</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>RvKBo147YF2XKu+/t0GEcEEQ3i2VIUkPCtvoOhNoLQo=</DigestValue></Reference></SignedInfo><SignatureValue>hV4dEppf+Ewjw2xC8DaRV+aQX3hi8yjGiZ8nQG372v+13evKdQx7twLxDQMTwq840qURFKZsfqzD9R0/95SfmhHZl+i694SaeuPf/PZ39t1rF3I+x4DU6Gj2iUY5NZWHRlFxWKhe1Rc/wT3H22t6p2OEjfDMkiHmuah+VVN08lg=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>1gLXR0ZvNlJlQaflq+h8od90rcBXYTHxAsRGuevnERB1adAScxy9SOj3DeKibpwZ3tL8T+LA/z+A6XoGpS0V/sX4gWTpXjVGAGr4B82tAVNzWa/GVxIFQNTekd2K5Zg36KPI0iDjM1bRXOjtWn8/PbO468g4BlHwKjAakhhVvbE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQHUt4EMd6rapC1M4TCR8p6zANBgkqhkiG9w0BAQsFADA3MTUwMwYDVQQDHiwAQwBBAE4AQQBSAEQALQBEAEUAUwBLAFQATwBQAC0AXABDAEEATgBBAFIARDAeFw0yMjA4MjUxNDM0MDRaFw0yMzA4MjUyMDM0MDRaMDcxNTAzBgNVBAMeLABDAEEATgBBAFIARAAtAEQARQBTAEsAVABPAFAALQBcAEMAQQBOAEEAUgBEMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWAtdHRm82UmVBp+Wr6Hyh33StwFdhMfECxEa56+cREHVp0BJzHL1I6PcN4qJunBne0vxP4sD/P4DpegalLRX+xfiBZOleNUYAavgHza0BU3NZr8ZXEgVA1N6R3YrlmDfoo8jSIOMzVtFc6O1afz89s7jryDgGUfAqMBqSGFW9sQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBANA2Ma2tbiNx1Upa6BA3vyskvKY9nrDo7qia4PgYDo36nbMs21W+AuCeHdgDPdlA/LLlvJsjbuz+cJadeXven/CKZMHrGGWHA0WTM63V/SCMVuNlFb/5n7tJDy1SMA4tCu7Rnw5WUJmjxar/GwEPC3hCA5bOkhbY5+pmlrjL6nZ8</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

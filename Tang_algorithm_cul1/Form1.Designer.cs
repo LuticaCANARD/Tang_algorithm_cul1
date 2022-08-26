@@ -94,13 +94,14 @@
             this.traitlist,
             this.stat,
             this.dice});
+            this.listView.Dock = System.Windows.Forms.DockStyle.Top;
             this.listView.HideSelection = false;
             this.listView.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.listView.Location = new System.Drawing.Point(17, 41);
+            this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Margin = new System.Windows.Forms.Padding(4);
             this.listView.Name = "listView";
             this.listView.ShowItemToolTips = true;
-            this.listView.Size = new System.Drawing.Size(1113, 537);
+            this.listView.Size = new System.Drawing.Size(1143, 572);
             this.listView.TabIndex = 2;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -147,7 +148,7 @@
             // 
             // turncount
             // 
-            this.turncount.Location = new System.Drawing.Point(1019, 6);
+            this.turncount.Location = new System.Drawing.Point(361, 620);
             this.turncount.Name = "turncount";
             this.turncount.ReadOnly = true;
             this.turncount.Size = new System.Drawing.Size(100, 28);
@@ -157,7 +158,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(959, 9);
+            this.label1.Location = new System.Drawing.Point(311, 623);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 18);
             this.label1.TabIndex = 5;
@@ -281,6 +282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1143, 675);
             this.Controls.Add(this.selDelbtn);
             this.Controls.Add(this.debug);

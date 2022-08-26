@@ -220,7 +220,14 @@ namespace Tang_algorithm_cul1
 
         private void Add_human_Click(object sender, EventArgs e)
         {
-            persons_g.Add(new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text),null));
+            string trait_path = @"./trait.json";
+            JObject keyValues = new JObject();
+            using (StreamReader file2 = File.OpenText(trait_path))
+            using (JsonTextReader reader = new JsonTextReader(file2))
+            {
+                keyValues = (JObject)JToken.ReadFrom(reader);
+            }
+            persons_g.Add(new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text), keyValues));
             listView.Items.Clear();
             listView.BeginUpdate();
             int code = 1;

@@ -54,20 +54,48 @@ namespace Tang_algorithm_cul1
         {
             if (this.st_die == 0 && !mode) return 0 ;
             int age = this.age;
-            
-
-
-            /*if (Array.IndexOf(traits, "") != -1) 
-            {
-
-            }*/
-            JArray diepercent = (JArray)book["die_probability"];
-            JArray dieage = (JArray)book["die_age"];
-            int die = (int)diepercent[diepercent.Count-1];
-            if (!mode)this.age += 1;
             Random rand = new Random();
             int dicef = rand.Next(0, 100);
             int dis = (int)book["disease"];
+            JArray diepercent = (JArray)book["die_probability"];
+            JArray dieage = (JArray)book["die_age"];
+            JObject trait = (JObject)book["trait"];
+            int die = (int)diepercent[diepercent.Count-1];
+
+
+
+            foreach(string tra in this.traits) 
+            {
+                JObject tra_obj = (JObject)book["trait"][tra];
+                if (tra_obj["type"].ToString() == "unique") 
+                {
+                    if (tra_obj["die_age"] != null) 
+                    {
+                        dieage = (JArray)tra_obj["die_age"];
+                        diepercent = (JArray)tra_obj["die_probability"];
+                        die = (int)diepercent[diepercent.Count - 1];
+
+                    }
+                    if (tra_obj["disease"] != null) 
+                    {
+                        dis = int.Parse(tra_obj["disease"].ToString());
+                    }
+                    if (tra_obj["death_p"]!= null) 
+                    {
+                        die += (int)tra_obj["death_p"];
+                    }
+                }
+                else 
+                {
+                    if (tra_obj["death_p"] != null)
+                    {
+                        die += (int)tra_obj["death_p"];
+                    }
+                }
+            }
+            
+            if (!mode)this.age += 1;
+
             for (int i =0; i< dieage.Count; i++) 
             {
                 if (age < (int)dieage[i]) 
@@ -76,11 +104,6 @@ namespace Tang_algorithm_cul1
                     break;
                 }
 
-            }
-            foreach(string tra in this.traits) 
-            {
-                if (tra == null) { continue; }
-                die += (int)this.book["trait"][tra];
             }
             if (dicef > die + dis) this.st_die = 2;
             else if (dicef > die) this.st_die = 1;

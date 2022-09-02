@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 
 namespace Tang_algorithm_cul1
@@ -55,41 +56,54 @@ namespace Tang_algorithm_cul1
             if (this.st_die == 0 && !mode) return 0 ;
             int age = this.age;
             Random rand = new Random();
-            int dicef = rand.Next(0, 100);
+            
             int dis = (int)book["disease"];
             JArray diepercent = (JArray)book["die_probability"];
             JArray dieage = (JArray)book["die_age"];
             JObject trait = (JObject)book["trait"];
             int die = (int)diepercent[diepercent.Count-1];
 
+            int dicef;
 
-
-            foreach(string tra in this.traits) 
+            if (age<(int)book["dice_age"]) 
+            { 
+                int dice1v = rand.Next(1, 100);
+                 Thread.Sleep(1);
+                int dice2v = rand.Next(1, 100);
+                  dicef = Math.Max(dice1v, dice2v); 
+            } 
+            else
+            { dicef = rand.Next(0, 1000);}
+             
+            foreach (string tra in this.traits)
             {
-                JObject tra_obj = (JObject)book["trait"][tra];
-                if (tra_obj["type"].ToString() == "unique") 
+                if (trait[tra] != null)
                 {
-                    if (tra_obj["die_age"] != null) 
+                    JObject tra_obj = (JObject)trait[tra];
+                    if (tra_obj["type"].ToString() == "unique")
                     {
-                        dieage = (JArray)tra_obj["die_age"];
-                        diepercent = (JArray)tra_obj["die_probability"];
-                        die = (int)diepercent[diepercent.Count - 1];
+                        if (tra_obj["die_age"] != null)
+                        {
+                            dieage = (JArray)tra_obj["die_age"];
+                            diepercent = (JArray)tra_obj["die_probability"];
+                            die = (int)diepercent[diepercent.Count - 1];
 
+                        }
+                        if (tra_obj["disease"] != null)
+                        {
+                            dis = int.Parse(tra_obj["disease"].ToString());
+                        }
+                        if (tra_obj["death_p"] != null)
+                        {
+                            die += (int)tra_obj["death_p"];
+                        }
                     }
-                    if (tra_obj["disease"] != null) 
+                    else
                     {
-                        dis = int.Parse(tra_obj["disease"].ToString());
-                    }
-                    if (tra_obj["death_p"]!= null) 
-                    {
-                        die += (int)tra_obj["death_p"];
-                    }
-                }
-                else 
-                {
-                    if (tra_obj["death_p"] != null)
-                    {
-                        die += (int)tra_obj["death_p"];
+                        if (tra_obj["death_p"] != null)
+                        {
+                            die += (int)tra_obj["death_p"];
+                        }
                     }
                 }
             }

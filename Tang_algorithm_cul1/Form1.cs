@@ -102,11 +102,18 @@ namespace Tang_algorithm_cul1
 
         private void skipbtn_Click(object sender, EventArgs e)
         {
+            List<int> ints = new List<int>() { };
+            foreach(ListViewItem item_of_check in listView.SelectedItems) 
+            {
+                ints.Add(int.Parse( item_of_check.Text.ToString()));
+                debug.Text= item_of_check.Text.ToString();
+            }
             listView.Items.Clear();
             listView.BeginUpdate();
             int code = 1;
             foreach (Person per in persons_g) 
             {
+                
                 int l = per.dice(false);
                 Thread.Sleep(2);
                 ListViewItem item = new ListViewItem(code.ToString());
@@ -128,6 +135,11 @@ namespace Tang_algorithm_cul1
                 item.SubItems.Add(tras);
                 item.SubItems.Add(alive);
                 item.SubItems.Add(l.ToString());
+                if (ints.Contains(code)) 
+                { 
+                    item.Checked = true;
+                    debug.Text = "checked";
+                }
                 listView.Items.Add(item);
                 code++;
             }
@@ -299,6 +311,11 @@ namespace Tang_algorithm_cul1
                 killed += 1;
             }
             listviewupdate();
+        }
+
+        private void add_tra_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

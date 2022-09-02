@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "",
+            ""}, -1);
             this.skipbtn = new System.Windows.Forms.Button();
             this.loadbtn = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -97,6 +100,9 @@
             this.listView.Dock = System.Windows.Forms.DockStyle.Top;
             this.listView.HideSelection = false;
             this.listView.ImeMode = System.Windows.Forms.ImeMode.On;
+            listViewItem2.Tag = "tagd";
+            this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Margin = new System.Windows.Forms.Padding(4);
             this.listView.Name = "listView";
@@ -244,6 +250,7 @@
             this.add_tra.Name = "add_tra";
             this.add_tra.Size = new System.Drawing.Size(379, 28);
             this.add_tra.TabIndex = 10;
+            this.add_tra.TextChanged += new System.EventHandler(this.add_tra_TextChanged);
             // 
             // add_stat
             // 
@@ -272,7 +279,7 @@
             // 
             this.selDelbtn.Location = new System.Drawing.Point(467, 620);
             this.selDelbtn.Name = "selDelbtn";
-            this.selDelbtn.Size = new System.Drawing.Size(102, 29);
+            this.selDelbtn.Size = new System.Drawing.Size(102, 33);
             this.selDelbtn.TabIndex = 19;
             this.selDelbtn.Text = "선택삭제";
             this.selDelbtn.UseVisualStyleBackColor = true;

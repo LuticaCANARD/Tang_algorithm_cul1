@@ -66,7 +66,7 @@ namespace Tang_algorithm_cul1
 
             int dicef;
 
-
+            
             if (age<(int)book["dice_age"]) 
             { 
                 int dice1v = rand.Next(1, 100);

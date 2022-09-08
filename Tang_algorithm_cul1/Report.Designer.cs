@@ -33,9 +33,10 @@
             // 
             // Report_text
             // 
+            this.Report_text.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Report_text.Location = new System.Drawing.Point(0, 0);
             this.Report_text.Name = "Report_text";
-            this.Report_text.Size = new System.Drawing.Size(544, 360);
+            this.Report_text.Size = new System.Drawing.Size(541, 372);
             this.Report_text.TabIndex = 0;
             this.Report_text.Text = "";
             // 

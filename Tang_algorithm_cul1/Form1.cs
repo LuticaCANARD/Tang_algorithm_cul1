@@ -26,6 +26,9 @@ namespace Tang_algorithm_cul1
             InitializeComponent();
         }
         List<Person> persons_g;
+        // 이하는 신형
+        List<showHuman> person_gg = new List<showHuman>() { };
+
         PersonList lists;
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -51,37 +54,14 @@ namespace Tang_algorithm_cul1
                     JArray ja = (JArray)k["trait"];
                     Person person =
                         new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues);
-                    persons.Add(person);
+                    showHuman human = new showHuman(person);
+                    person_gg.Add(human);
                 }
-                persons_g = persons;
-                listView.GridLines = true;
-                int code = 1;
-                foreach (Person human in persons_g)
-                {
-                    ListViewItem item = new ListViewItem(code.ToString());
-                    string tras = "";
-                    foreach (string tr in human.traits)
-                    {
-                        tras += tr + ",";
-                    }
-                    if (tras.Length > 1) tras = tras.Substring(0, tras.Length - 1);
-                    string alive = "";
-                    switch (human.st_die)
-                    {
-                        case 0: alive = "사망"; break;
-                        case 1: alive = "병치레"; break;
-                        case 2: alive = "생존"; break;
-                    }
-                    item.SubItems.Add(human.name);
-                    item.SubItems.Add(human.age.ToString());
-                    item.SubItems.Add(tras);
-                    item.SubItems.Add(alive);
-                    item.SubItems.Add(human.dicek.ToString());
-                    listView.Items.Add(item);
-                    code++;
-                }
-                
+
+
+
             }
+            dataview21.maingridcon.ItemsSource = person_gg;
         }
 
 
@@ -102,75 +82,36 @@ namespace Tang_algorithm_cul1
 
         private void skipbtn_Click(object sender, EventArgs e)
         {
-            List<int> ints = new List<int>() { };
-            foreach(ListViewItem item_of_check in listView.SelectedItems) 
+            foreach (showHuman human in person_gg)
             {
-                ints.Add(int.Parse( item_of_check.Text.ToString()));
-                debug.Text= item_of_check.Text.ToString();
+                human.dice(false);
+                Thread.Sleep(10);
             }
-            listView.Items.Clear();
-            listView.BeginUpdate();
-            int code = 1;
-            foreach (Person per in persons_g) 
-            {
-                
-                int l = per.dice(false);
-                Thread.Sleep(2);
-                ListViewItem item = new ListViewItem(code.ToString());
-                string tras = "";
-                foreach (string tr in per.traits)
-                {
-                    tras += tr + ",";
-                }
-                if(tras.Length>0)tras = tras.Substring(0, tras.Length - 1);
-                string alive = "";
-                switch (per.st_die)
-                {
-                    case 0: alive = "사망"; break;
-                    case 1: alive = "병치레"; break;
-                    case 2: alive = "생존"; break;
-                }
-                item.SubItems.Add(per.name);
-                item.SubItems.Add(per.age.ToString());
-                item.SubItems.Add(tras);
-                item.SubItems.Add(alive);
-                item.SubItems.Add(l.ToString());
-                if (ints.Contains(code)) 
-                { 
-                    item.Checked = true;
-                    debug.Text = "checked";
-                }
-                listView.Items.Add(item);
-                code++;
-            }
-            listView.EndUpdate();
-            counter++;
-            turncount.Text = counter.ToString();
-
+            listviewupdate();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string st = "";
-            foreach(Person per in persons_g) 
+            foreach (showHuman per in person_gg)
             {
-                string alive="";
+                string alive = "";
                 string tras = "";
-                foreach (string tr in per.traits)
+                foreach (string tr in per.original.traits)
                 {
                     tras += tr + ",";
                 }
-                if(tras.Length>0) tras = tras.Substring(0, tras.Length - 1);
-                
-                switch (per.st_die)
+                if (tras.Length > 0) tras = tras.Substring(0, tras.Length - 1);
+
+                switch (int.Parse(per.st_die))
                 {
                     case 0: alive = "사망"; break;
                     case 1: alive = "병치레"; break;
                     case 2: alive = "생존"; break;
-                
+
                 }
-                st += "이름 : " + per.name + "(나이: " + per.age.ToString() + ") [특성 : " + tras + "] 상황 : "+alive+"/Dice:"+per.dicek+"\n";
+                st += "이름 : " + per.name + "(나이: " + per.age.ToString() + ") [특성 : " + tras + "] 상황 : " + alive + "/Dice:" + per.dicek + "\n";
             }
             Report page = new Report(st, counter);
             page.Show();
@@ -179,7 +120,7 @@ namespace Tang_algorithm_cul1
 
         private void turncount_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void loadbtn_Click(object sender, EventArgs e)
@@ -191,13 +132,13 @@ namespace Tang_algorithm_cul1
             }
             JObject returnobj = new JObject();
             JArray returnarr = new JArray();
-            foreach(Person per in persons_g)
+            foreach (Person per in persons_g)
             {
                 JObject persona = new JObject();
                 persona.Add("name", per.name.ToString());
                 persona.Add("age", per.age.ToString());
                 JArray tras = new JArray();
-                foreach(string trs in per.traits) 
+                foreach (string trs in per.traits)
                 {
                     tras.Add(trs);
                 }
@@ -220,13 +161,7 @@ namespace Tang_algorithm_cul1
 
         private void selectdice_Click(object sender, EventArgs e)
         {
-            foreach(ListViewItem listViewItem in listView.SelectedItems) 
-            {
-                persons_g[int.Parse(listViewItem.SubItems[0].Text.ToString())-1].dice(true);
-                Thread.Sleep(1);
-                debug.Text = listViewItem.SubItems[0].Text.ToString();
-            }
-            listviewupdate();
+
 
         }
 
@@ -239,83 +174,73 @@ namespace Tang_algorithm_cul1
             {
                 keyValues = (JObject)JToken.ReadFrom(reader);
             }
-            persons_g.Add(new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text), keyValues));
-            listView.Items.Clear();
-            listView.BeginUpdate();
-            int code = 1;
-            foreach (Person per in persons_g)
-            {
-                ListViewItem item = new ListViewItem(code.ToString());
-                string tras = "";
-                foreach (string tr in per.traits)
-                {
-                    tras += tr + ",";
-                }
-                if (tras.Length > 0) tras = tras.Substring(0, tras.Length - 1);
-                string alive = "";
-                switch (per.st_die)
-                {
-                    case 0: alive = "사망"; break;
-                    case 1: alive = "병치레"; break;
-                    case 2: alive = "생존"; break;
-                }
-                item.SubItems.Add(per.name);
-                item.SubItems.Add(per.age.ToString());
-                item.SubItems.Add(tras);
-                item.SubItems.Add(alive);
-                item.SubItems.Add(per.dicek.ToString());
-                listView.Items.Add(item);
-                code++;
-            }
-            listView.EndUpdate();
+            Person per=new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text), keyValues);
+            showHuman human = new showHuman(per);
+            person_gg.Add(human);
+            listviewupdate();
         }
 
-        protected void listviewupdate() 
+        protected void listviewupdate()
         {
-            listView.Items.Clear();
-            listView.BeginUpdate();
-            int code = 1;
-            foreach (Person per in persons_g)
-            {
-                ListViewItem item = new ListViewItem(code.ToString());
-                string tras = "";
-                foreach (string tr in per.traits)
-                {
-                    tras += tr + ",";
-                }
-                if (tras.Length > 0) tras = tras.Substring(0, tras.Length - 1);
-                string alive = "";
-                switch (per.st_die)
-                {
-                    case 0: alive = "사망"; break;
-                    case 1: alive = "병치레"; break;
-                    case 2: alive = "생존"; break;
-                }
-                item.SubItems.Add(per.name);
-                item.SubItems.Add(per.age.ToString());
-                item.SubItems.Add(tras);
-                item.SubItems.Add(alive);
-                item.SubItems.Add(per.dicek.ToString());
-                listView.Items.Add(item);
-                code++;
-            }
-            listView.EndUpdate();
+            dataview21.maingridcon.ItemsSource = null ;
+            dataview21.maingridcon.ItemsSource = person_gg;
         }
 
         private void selDelbtn_Click(object sender, EventArgs e)
         {
-            int killed = 1;
-            foreach (ListViewItem listViewItem in listView.SelectedItems)
-            {
-                persons_g.RemoveAt(int.Parse(listViewItem.SubItems[0].Text.ToString())- killed);
-                killed += 1;
-            }
-            listviewupdate();
+            ;
         }
 
         private void add_tra_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void elementHost1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        {
+
+        }
+        public class showHuman
+        {
+            public string name { get; set; }
+            public string age { get; set; }
+            public string traits { get; set; }
+            public string st_die { get; set; }
+            public string dicek { get; set; }
+           public Person original { get; set; }
+
+            public showHuman(Person per)
+            {
+                this.traits ="";
+                foreach(string tra in per.traits) 
+                {
+                    this.traits += tra + " ";
+                }
+                this.name = per.name;
+                this.age = per.age.ToString();
+                switch (per.st_die) 
+                {
+                    case 0: this.st_die = "사망";break;
+                    case 1: this.st_die = "병치레";break;
+                    case 2: this.st_die = "건강";break;
+                }
+                this.dicek = per.dicek.ToString();
+                this.original = per;
+            }
+            public void dice(bool mode) 
+            {
+                this.original.dice(mode);
+                this.age = this.original.age.ToString();
+                switch (this.original.st_die)
+                {
+                    case 0: this.st_die = "사망"; break;
+                    case 1: this.st_die = "병치레"; break;
+                    case 2: this.st_die = "건강"; break;
+                }
+                this.dicek = this.original.dicek.ToString();
+
+            }
+        }
+        
     }
 }

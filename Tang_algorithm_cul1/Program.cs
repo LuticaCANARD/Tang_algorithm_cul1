@@ -74,7 +74,8 @@ namespace Tang_algorithm_cul1
             } 
             else
             { dicef = rand.Next(0, 1000);}
-             
+            int diseases = 0;
+            int dis_count = 1;
             foreach (string tra in this.traits)
             {
                 if (trait[tra] != null)
@@ -91,7 +92,9 @@ namespace Tang_algorithm_cul1
                         }
                         if (tra_obj["disease"] != null)
                         {
-                            dis = int.Parse(tra_obj["disease"].ToString());
+                            diseases += int.Parse(tra_obj["disease"].ToString());
+                            dis_count++;
+
                         }
                         if (tra_obj["death_p"] != null)
                         {
@@ -107,7 +110,9 @@ namespace Tang_algorithm_cul1
                     }
                 }
             }
-            
+            dis = (dis+diseases) *  / dis_count;
+
+
             if (!mode)this.age += 1;
 
             for (int i =0; i< dieage.Count; i++) 

@@ -28,19 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "",
-            ""}, -1);
             this.skipbtn = new System.Windows.Forms.Button();
             this.loadbtn = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.listView = new System.Windows.Forms.ListView();
-            this.number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Namecoulm = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Agecoulm = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.traitlist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.stat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
             this.turncount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,11 +47,15 @@
             this.add_age = new System.Windows.Forms.TextBox();
             this.debug = new System.Windows.Forms.Label();
             this.selDelbtn = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataview = new System.Windows.Forms.Integration.ElementHost();
+            this.dataview21 = new Tang_algorithm_cul1.dataview2();
             this.SuspendLayout();
             // 
             // skipbtn
             // 
-            this.skipbtn.Location = new System.Drawing.Point(904, 620);
+            this.skipbtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.skipbtn.Location = new System.Drawing.Point(904, 621);
             this.skipbtn.Margin = new System.Windows.Forms.Padding(4);
             this.skipbtn.Name = "skipbtn";
             this.skipbtn.Size = new System.Drawing.Size(107, 34);
@@ -72,10 +66,11 @@
             // 
             // loadbtn
             // 
-            this.loadbtn.Location = new System.Drawing.Point(1019, 620);
+            this.loadbtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.loadbtn.Location = new System.Drawing.Point(1020, 618);
             this.loadbtn.Margin = new System.Windows.Forms.Padding(4);
             this.loadbtn.Name = "loadbtn";
-            this.loadbtn.Size = new System.Drawing.Size(107, 34);
+            this.loadbtn.Size = new System.Drawing.Size(99, 36);
             this.loadbtn.TabIndex = 17;
             this.loadbtn.Text = "저장";
             this.loadbtn.UseVisualStyleBackColor = true;
@@ -85,65 +80,10 @@
             // 
             this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
-            // listView
-            // 
-            this.listView.AllowColumnReorder = true;
-            this.listView.AllowDrop = true;
-            this.listView.BackgroundImageTiled = true;
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.number,
-            this.Namecoulm,
-            this.Agecoulm,
-            this.traitlist,
-            this.stat,
-            this.dice});
-            this.listView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView.HideSelection = false;
-            this.listView.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem2.Tag = "tagd";
-            this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
-            this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.Margin = new System.Windows.Forms.Padding(4);
-            this.listView.Name = "listView";
-            this.listView.ShowItemToolTips = true;
-            this.listView.Size = new System.Drawing.Size(1143, 572);
-            this.listView.TabIndex = 2;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
-            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
-            // 
-            // number
-            // 
-            this.number.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.code;
-            // 
-            // Namecoulm
-            // 
-            this.Namecoulm.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.name;
-            this.Namecoulm.Width = 224;
-            // 
-            // Agecoulm
-            // 
-            this.Agecoulm.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.age;
-            // 
-            // traitlist
-            // 
-            this.traitlist.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.tra_str;
-            this.traitlist.Width = 324;
-            // 
-            // stat
-            // 
-            this.stat.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.stat;
-            this.stat.Width = 103;
-            // 
-            // dice
-            // 
-            this.dice.Text = global::Tang_algorithm_cul1.Properties.Settings.Default.dice;
-            this.dice.Width = 115;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(789, 620);
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.Location = new System.Drawing.Point(789, 621);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 34);
@@ -154,7 +94,8 @@
             // 
             // turncount
             // 
-            this.turncount.Location = new System.Drawing.Point(361, 620);
+            this.turncount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.turncount.Location = new System.Drawing.Point(361, 621);
             this.turncount.Name = "turncount";
             this.turncount.ReadOnly = true;
             this.turncount.Size = new System.Drawing.Size(100, 28);
@@ -163,8 +104,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(311, 623);
+            this.label1.Location = new System.Drawing.Point(311, 624);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 18);
             this.label1.TabIndex = 5;
@@ -172,10 +114,13 @@
             // 
             // Add_human
             // 
+            this.Add_human.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Add_human.AutoSize = true;
+            this.Add_human.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Add_human.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.Add_human.Location = new System.Drawing.Point(1020, 579);
+            this.Add_human.Location = new System.Drawing.Point(1020, 580);
             this.Add_human.Name = "Add_human";
-            this.Add_human.Size = new System.Drawing.Size(99, 34);
+            this.Add_human.Size = new System.Drawing.Size(96, 28);
             this.Add_human.TabIndex = 12;
             this.Add_human.Text = "사람 추가";
             this.Add_human.UseVisualStyleBackColor = false;
@@ -183,7 +128,8 @@
             // 
             // settingbtn
             // 
-            this.settingbtn.Location = new System.Drawing.Point(575, 619);
+            this.settingbtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.settingbtn.Location = new System.Drawing.Point(575, 620);
             this.settingbtn.Name = "settingbtn";
             this.settingbtn.Size = new System.Drawing.Size(100, 34);
             this.settingbtn.TabIndex = 13;
@@ -193,7 +139,8 @@
             // 
             // selectdice
             // 
-            this.selectdice.Location = new System.Drawing.Point(681, 619);
+            this.selectdice.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.selectdice.Location = new System.Drawing.Point(681, 620);
             this.selectdice.Name = "selectdice";
             this.selectdice.Size = new System.Drawing.Size(101, 34);
             this.selectdice.TabIndex = 14;
@@ -203,15 +150,17 @@
             // 
             // add_name
             // 
-            this.add_name.Location = new System.Drawing.Point(98, 585);
+            this.add_name.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.add_name.Location = new System.Drawing.Point(98, 586);
             this.add_name.Name = "add_name";
             this.add_name.Size = new System.Drawing.Size(120, 28);
             this.add_name.TabIndex = 8;
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(852, 587);
+            this.label2.Location = new System.Drawing.Point(852, 588);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 18);
             this.label2.TabIndex = 9;
@@ -219,8 +168,9 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(381, 593);
+            this.label3.Location = new System.Drawing.Point(381, 594);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 18);
             this.label3.TabIndex = 10;
@@ -228,6 +178,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(224, 593);
             this.label4.Name = "label4";
@@ -237,8 +188,9 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 593);
+            this.label5.Location = new System.Drawing.Point(38, 594);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 18);
             this.label5.TabIndex = 12;
@@ -246,7 +198,8 @@
             // 
             // add_tra
             // 
-            this.add_tra.Location = new System.Drawing.Point(467, 585);
+            this.add_tra.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.add_tra.Location = new System.Drawing.Point(467, 586);
             this.add_tra.Name = "add_tra";
             this.add_tra.Size = new System.Drawing.Size(379, 28);
             this.add_tra.TabIndex = 10;
@@ -254,22 +207,25 @@
             // 
             // add_stat
             // 
-            this.add_stat.Location = new System.Drawing.Point(911, 584);
+            this.add_stat.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.add_stat.Location = new System.Drawing.Point(911, 585);
             this.add_stat.Name = "add_stat";
             this.add_stat.Size = new System.Drawing.Size(100, 28);
             this.add_stat.TabIndex = 11;
             // 
             // add_age
             // 
-            this.add_age.Location = new System.Drawing.Point(275, 588);
+            this.add_age.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.add_age.Location = new System.Drawing.Point(275, 589);
             this.add_age.Name = "add_age";
             this.add_age.Size = new System.Drawing.Size(100, 28);
             this.add_age.TabIndex = 9;
             // 
             // debug
             // 
+            this.debug.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.debug.AutoSize = true;
-            this.debug.Location = new System.Drawing.Point(38, 636);
+            this.debug.Location = new System.Drawing.Point(38, 637);
             this.debug.Name = "debug";
             this.debug.Size = new System.Drawing.Size(54, 18);
             this.debug.TabIndex = 18;
@@ -277,7 +233,8 @@
             // 
             // selDelbtn
             // 
-            this.selDelbtn.Location = new System.Drawing.Point(467, 620);
+            this.selDelbtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.selDelbtn.Location = new System.Drawing.Point(467, 621);
             this.selDelbtn.Name = "selDelbtn";
             this.selDelbtn.Size = new System.Drawing.Size(102, 33);
             this.selDelbtn.TabIndex = 19;
@@ -285,12 +242,38 @@
             this.selDelbtn.UseVisualStyleBackColor = true;
             this.selDelbtn.Click += new System.EventHandler(this.selDelbtn_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Location = new System.Drawing.Point(0, 547);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(0, 0);
+            this.panel1.TabIndex = 0;
+            // 
+            // dataview
+            // 
+            this.dataview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataview.Location = new System.Drawing.Point(-4, 0);
+            this.dataview.Name = "dataview";
+            this.dataview.Size = new System.Drawing.Size(1123, 541);
+            this.dataview.TabIndex = 21;
+            this.dataview.TabStop = false;
+            this.dataview.Text = "elementHost1";
+            this.dataview.Child = this.dataview21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1143, 675);
+            this.ClientSize = new System.Drawing.Size(1122, 667);
+            this.Controls.Add(this.loadbtn);
+            this.Controls.Add(this.dataview);
             this.Controls.Add(this.selDelbtn);
             this.Controls.Add(this.debug);
             this.Controls.Add(this.add_age);
@@ -307,9 +290,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.turncount);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.listView);
-            this.Controls.Add(this.loadbtn);
             this.Controls.Add(this.skipbtn);
+            this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -324,16 +306,9 @@
         private System.Windows.Forms.Button skipbtn;
         private System.Windows.Forms.Button loadbtn;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.ListView listView;
-        private System.Windows.Forms.ColumnHeader number;
-        private System.Windows.Forms.ColumnHeader Namecoulm;
-        private System.Windows.Forms.ColumnHeader Agecoulm;
-        private System.Windows.Forms.ColumnHeader traitlist;
-        private System.Windows.Forms.ColumnHeader stat;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox turncount;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader dice;
         private System.Windows.Forms.Button Add_human;
         private System.Windows.Forms.Button settingbtn;
         private System.Windows.Forms.Button selectdice;
@@ -347,6 +322,9 @@
         private System.Windows.Forms.TextBox add_age;
         private System.Windows.Forms.Label debug;
         private System.Windows.Forms.Button selDelbtn;
+        private System.Windows.Forms.Panel panel1;
+        private dataview2 dataview21;
+        private System.Windows.Forms.Integration.ElementHost dataview;
     }
 }
 

@@ -62,9 +62,11 @@ namespace Tang_algorithm_cul1
             JArray dieage = (JArray)book["die_age"];
             JObject trait = (JObject)book["trait"];
             int die = (int)diepercent[diepercent.Count-1];
+            
 
             int dicef;
 
+            
             if (age<(int)book["dice_age"]) 
             { 
                 int dice1v = rand.Next(1, 100);
@@ -78,9 +80,27 @@ namespace Tang_algorithm_cul1
             int dis_count = 1;
             foreach (string tra in this.traits)
             {
+                int perscope;
+                if (age < (int)book["dice_age"])
+                    perscope = 1;
+                else 
+                    perscope = (int)book["scope_dice"];
+
                 if (trait[tra] != null)
                 {
+
                     JObject tra_obj = (JObject)trait[tra];
+                    if (tra_obj["scope_dice"] != null) 
+                    { 
+                        if(age < (int)book["dice_age"]) 
+                        {
+                            perscope = 1;
+                        }
+                        else 
+                        {
+                            perscope = (int)tra_obj["scope_dice"];
+                        }
+                    }
                     if (tra_obj["type"].ToString() == "unique")
                     {
                         if (tra_obj["die_age"] != null)
@@ -98,14 +118,14 @@ namespace Tang_algorithm_cul1
                         }
                         if (tra_obj["death_p"] != null)
                         {
-                            die += (int)tra_obj["death_p"];
+                            die += (int)tra_obj["death_p"]* perscope;
                         }
                     }
                     else
                     {
                         if (tra_obj["death_p"] != null)
                         {
-                            die += (int)tra_obj["death_p"];
+                            die += (int)tra_obj["death_p"]* perscope;
                         }
                     }
                 }

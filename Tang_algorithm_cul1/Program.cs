@@ -112,7 +112,7 @@ namespace Tang_algorithm_cul1
                         }
                         if (tra_obj["disease"] != null)
                         {
-                            diseases += int.Parse(tra_obj["disease"].ToString());
+                            diseases += int.Parse(tra_obj["disease"].ToString())* perscope;
                             dis_count++;
 
                         }
@@ -130,7 +130,7 @@ namespace Tang_algorithm_cul1
                     }
                 }
             }
-            dis = (dis+diseases) *  / dis_count;
+            dis = (dis+diseases) / dis_count;
 
 
             if (!mode)this.age += 1;

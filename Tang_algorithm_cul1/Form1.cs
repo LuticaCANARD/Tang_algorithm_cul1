@@ -25,7 +25,6 @@ namespace Tang_algorithm_cul1
         {
             InitializeComponent();
         }
-        List<Person> persons_g;
         // 이하는 신형
         List<showHuman> person_gg = new List<showHuman>() { };
 
@@ -85,10 +84,11 @@ namespace Tang_algorithm_cul1
             foreach (showHuman human in person_gg)
             {
                 human.dice(false);
-                Thread.Sleep(10);
+                Thread.Sleep(12);
             }
             listviewupdate();
-
+            counter++;
+            turncount.Text = counter.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -104,7 +104,7 @@ namespace Tang_algorithm_cul1
                 }
                 if (tras.Length > 0) tras = tras.Substring(0, tras.Length - 1);
 
-                switch (int.Parse(per.st_die))
+                switch (per.original.st_die)
                 {
                     case 0: alive = "사망"; break;
                     case 1: alive = "병치레"; break;
@@ -132,8 +132,9 @@ namespace Tang_algorithm_cul1
             }
             JObject returnobj = new JObject();
             JArray returnarr = new JArray();
-            foreach (Person per in persons_g)
+            foreach (showHuman human in person_gg)
             {
+                Person per = human.original;
                 JObject persona = new JObject();
                 persona.Add("name", per.name.ToString());
                 persona.Add("age", per.age.ToString());
@@ -161,8 +162,12 @@ namespace Tang_algorithm_cul1
 
         private void selectdice_Click(object sender, EventArgs e)
         {
-
-
+            foreach(showHuman human in dataview21.maingridcon.SelectedItems) 
+            {
+                human.dice(true);
+                Thread.Sleep(12);
+            }
+            listviewupdate();
         }
 
         private void Add_human_Click(object sender, EventArgs e)
@@ -188,7 +193,11 @@ namespace Tang_algorithm_cul1
 
         private void selDelbtn_Click(object sender, EventArgs e)
         {
-            ;
+            foreach (showHuman human in dataview21.maingridcon.SelectedItems)
+            {
+                person_gg.Remove(human);
+            }
+            listviewupdate();
         }
 
         private void add_tra_TextChanged(object sender, EventArgs e)
@@ -207,15 +216,16 @@ namespace Tang_algorithm_cul1
             public string traits { get; set; }
             public string st_die { get; set; }
             public string dicek { get; set; }
-           public Person original { get; set; }
+            public Person original { get; set; }
 
             public showHuman(Person per)
             {
                 this.traits ="";
                 foreach(string tra in per.traits) 
                 {
-                    this.traits += tra + " ";
+                    this.traits += tra + ",";
                 }
+                this.traits = traits.TrimEnd(',');
                 this.name = per.name;
                 this.age = per.age.ToString();
                 switch (per.st_die) 
@@ -241,6 +251,29 @@ namespace Tang_algorithm_cul1
 
             }
         }
-        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach(showHuman show in person_gg) 
+            {
+                show.original.traits = show.traits.Split(',');
+                show.original.name = show.name;
+                show.original.age = int.Parse(show.age);
+                show.original.dicek = int.Parse(show.dicek);
+                switch (show.st_die) 
+                {
+                    case "사망": show.original.st_die = 0;  break;
+                    case "병치레": show.original.st_die = 1; break;
+                    case "건강": show.original.st_die = 2; break;
+                    default:MessageBox.Show(show.name+"의 상태 문자열이 이상합니다. \n 사망/건강/병치레 셋중 하나만 입력하십시오", "ERROR!"); break;
+                }
+            }
+            listviewupdate();
+        }
+
+        private void dataview_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        {
+
+        }
     }
 }

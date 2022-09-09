@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800" Cursor="Arrow" Uid="1234">
 
     <Grid x:Name="maingrid">
-        <DataGrid x:Name="maingridcon" SelectionChanged="DataGrid_SelectionChanged" CanUserAddRows="False" CanUserReorderColumns="True" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="maingridcon" SelectionChanged="DataGrid_SelectionChanged" CanUserAddRows="False" CanUserReorderColumns="True" AutoGenerateColumns="False" DataContextChanged="maingridcon_DataContextChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="dataGridTextColumn" Header="이름" Binding="{Binding Path=name}" />
                 <DataGridTextColumn Header="나이" Binding="{Binding Path=age}"/>

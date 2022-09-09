@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -18,7 +19,7 @@ namespace Tang_algorithm_cul1
     /// <summary>
     /// dataview2.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class dataview2 : UserControl
+    public partial class dataview2 : System.Windows.Controls.UserControl
     {
         public dataview2()
         {
@@ -32,7 +33,11 @@ namespace Tang_algorithm_cul1
 
         private void maingridcon_SourceUpdated(object sender, DataTransferEventArgs e)
         {
+            System.Windows.Forms.MessageBox.Show("변경", "변경");
+        }
 
+        private void maingridcon_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
         }
     }
 }

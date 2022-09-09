@@ -48,6 +48,7 @@
             this.debug = new System.Windows.Forms.Label();
             this.selDelbtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.dataview = new System.Windows.Forms.Integration.ElementHost();
             this.dataview21 = new Tang_algorithm_cul1.dataview2();
             this.SuspendLayout();
@@ -254,6 +255,16 @@
             this.panel1.Size = new System.Drawing.Size(0, 0);
             this.panel1.TabIndex = 0;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1020, 547);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(96, 27);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "변경 저장";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // dataview
             // 
             this.dataview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -265,6 +276,7 @@
             this.dataview.TabIndex = 21;
             this.dataview.TabStop = false;
             this.dataview.Text = "elementHost1";
+            this.dataview.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.dataview_ChildChanged);
             this.dataview.Child = this.dataview21;
             // 
             // Form1
@@ -272,6 +284,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 667);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.loadbtn);
             this.Controls.Add(this.dataview);
             this.Controls.Add(this.selDelbtn);
@@ -325,6 +338,7 @@
         private System.Windows.Forms.Panel panel1;
         private dataview2 dataview21;
         private System.Windows.Forms.Integration.ElementHost dataview;
+        private System.Windows.Forms.Button button2;
     }
 }
 

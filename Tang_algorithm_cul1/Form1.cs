@@ -51,7 +51,7 @@ namespace Tang_algorithm_cul1
                 {
                     JArray ja = (JArray)k["trait"];
                     Person person =
-                        new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues);
+                        new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues,"");
                     showHuman human = new showHuman(person);
                     person_gg.Add(human);
                 }
@@ -83,7 +83,6 @@ namespace Tang_algorithm_cul1
             foreach (showHuman human in person_gg)
             {
                 human.dice(false);
-                Thread.Sleep(12);
             }
             listviewupdate();
             counter++;
@@ -115,7 +114,7 @@ namespace Tang_algorithm_cul1
             Report page = new Report(st, counter);
             page.Show();
         }
-        int counter = 0;
+        int counter = 1901;
 
         private void turncount_TextChanged(object sender, EventArgs e)
         {
@@ -134,9 +133,11 @@ namespace Tang_algorithm_cul1
             foreach (showHuman human in person_gg)
             {
                 Person per = human.original;
-                JObject persona = new JObject();
-                persona.Add("name", per.name.ToString());
-                persona.Add("age", per.age.ToString());
+                JObject persona = new JObject
+                {
+                    { "name", per.name.ToString() },
+                    { "age", per.age.ToString() }
+                };
                 JArray tras = new JArray();
                 foreach (string trs in per.traits)
                 {
@@ -164,7 +165,6 @@ namespace Tang_algorithm_cul1
             foreach(showHuman human in dataview21.maingridcon.SelectedItems) 
             {
                 human.dice(true);
-                Thread.Sleep(12);
             }
             listviewupdate();
         }
@@ -178,7 +178,7 @@ namespace Tang_algorithm_cul1
             {
                 keyValues = (JObject)JToken.ReadFrom(reader);
             }
-            Person per=new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text), keyValues);
+            Person per=new Person(add_name.Text, int.Parse(add_age.Text), add_tra.Text.Split(','), int.Parse(add_stat.Text), keyValues,"");
             showHuman human = new showHuman(per);
             person_gg.Add(human);
             listviewupdate();
@@ -216,6 +216,7 @@ namespace Tang_algorithm_cul1
             public string st_die { get; set; }
             public string dicek { get; set; }
             public Person original { get; set; }
+            public string agent { get; set; }
 
             public showHuman(Person per)
             {
@@ -227,6 +228,7 @@ namespace Tang_algorithm_cul1
                 this.traits = traits.TrimEnd(',');
                 this.name = per.name;
                 this.age = per.age.ToString();
+                this.agent = per.agent;
                 switch (per.st_die) 
                 {
                     case 0: this.st_die = "사망";break;
@@ -253,12 +255,14 @@ namespace Tang_algorithm_cul1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // 여기에서 상태 역변환
             foreach(showHuman show in person_gg) 
             {
                 show.original.traits = show.traits.Split(',');
                 show.original.name = show.name;
                 show.original.age = int.Parse(show.age);
                 show.original.dicek = int.Parse(show.dicek);
+                show.original.agent = show.agent;
                 switch (show.st_die) 
                 {
                     case "사망": show.original.st_die = 0;  break;

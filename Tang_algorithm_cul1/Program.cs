@@ -42,14 +42,16 @@ namespace Tang_algorithm_cul1
         public int st_die { get; set; }
         public JObject book { get; set; }
         public int dicek { get; set; }
+        public string agent { get; set; }
 
-        public Person(string _name, int _age , string[] _trait,int _st_die,JObject keyValues) 
+        public Person(string _name, int _age , string[] _trait,int _st_die,JObject keyValues,string _agent) 
         { 
             this.name=_name;
             this.traits=_trait;
             this.age = _age;
             this.st_die = _st_die;
             this.book = keyValues;
+            this.agent = _agent;
         }
         public int dice(bool mode)
         {
@@ -63,14 +65,13 @@ namespace Tang_algorithm_cul1
             JObject trait = (JObject)book["trait"];
             int die = (int)diepercent[diepercent.Count-1];
             
-
             int dicef;
-
             
             if (age<(int)book["dice_age"]) 
             { 
                 int dice1v = rand.Next(1, 100);
-                 Thread.Sleep(1);
+                rand = new Random();
+
                 int dice2v = rand.Next(1, 100);
                   dicef = Math.Max(dice1v, dice2v); 
             } 
@@ -148,6 +149,7 @@ namespace Tang_algorithm_cul1
             else if (dicef > die) this.st_die = 1;
             else this.st_die = 0;
             this.dicek = dicef;
+            Thread.Sleep(12);
             return dicef;
         }
        

@@ -16,6 +16,7 @@
                 <DataGridTextColumn Header="특성목록" Binding="{Binding Path=traits}"/>
                 <DataGridTextColumn Header="상태" Binding="{Binding Path=st_die}"/>
                 <DataGridTextColumn Header="Dice" Binding="{Binding Path=dicek}"/>
+                <DataGridTextColumn Header="소속" Binding="{Binding Path=agent}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -11,8 +11,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.IO.Directory;
 
 
 
@@ -47,17 +49,12 @@ namespace Tang_algorithm_cul1
                 JArray array_a = new JArray();
                 array_a = (JArray)json["data"];
                 lists = new PersonList(persons);
-                foreach (JObject k in array_a)
-                {
-                    JArray ja = (JArray)k["trait"];
-                    Person person =
-                        new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues,"");
-                    showHuman human = new showHuman(person);
-                    person_gg.Add(human);
-                }
-
-
-
+                person_gg.AddRange(from JObject k in array_a
+                                   let ja = (JArray)k["trait"]
+                                   let person =
+                    new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues, "")
+                                   let human = new showHuman(person)
+                                   select human);
             }
             dataview21.maingridcon.ItemsSource = person_gg;
         }
@@ -123,6 +120,7 @@ namespace Tang_algorithm_cul1
 
         private void loadbtn_Click(object sender, EventArgs e)
         {
+            // 저장이다.
             string data_path = @"./data.json";
             if (System.IO.File.Exists(data_path))
             {
@@ -145,12 +143,18 @@ namespace Tang_algorithm_cul1
                 }
                 persona.Add("trait", tras);
                 persona.Add("die", per.st_die.ToString());
+                persona.Add("agent", per.agent);
                 returnarr.Add(persona);
             }
             returnobj.Add("data", returnarr);
             string retu_str = returnobj.ToString();
             System.IO.File.WriteAllText(data_path, retu_str);
-
+            string now_route = @"./logs/data_" +DateTime.Now.ToString("yyyyMMddHHmmss")+".json";
+            if (!Exists(@"./logs"))
+            {
+                CreateDirectory(@"./logs");
+            }
+            System.IO.File.WriteAllText(now_route, retu_str);
 
 
         }
@@ -277,6 +281,50 @@ namespace Tang_algorithm_cul1
         private void dataview_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //지정된 파일에서 불러오기
+            System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.Title = "파일 오픈 예제창";
+            ofd.FileName = "test";
+            ofd.Filter = "로그 (*.json) | *.json; | 모든 파일 (*.*) | *.*";
+
+            DialogResult dr = ofd.ShowDialog();
+            if(dr == DialogResult.OK)
+            {
+                string trait_path = @"./trait.json";
+                JObject keyValues = new JObject();
+                using (StreamReader file2 = File.OpenText(trait_path))
+                using (JsonTextReader reader = new JsonTextReader(file2))
+                {
+                    keyValues = (JObject)JToken.ReadFrom(reader);
+                }
+                string loaded_path = ofd.FileName;
+                using (StreamReader file = File.OpenText(loaded_path))
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JObject json = (JObject)JToken.ReadFrom(reader);
+                    List<Person> persons = new List<Person>();
+                    JArray array_a = new JArray();
+                    array_a = (JArray)json["data"];
+                    lists = new PersonList(persons);
+                    person_gg.AddRange(from JObject k in array_a
+                                       let ja = (JArray)k["trait"]
+                                       let person =
+                        new Person(k["name"].ToString(), (int)k["age"], ja.ToObject<string[]>(), (int)k["die"], keyValues, "")
+                                       let human = new showHuman(person)
+                                       select human);
+                }
+                dataview21.maingridcon.ItemsSource = person_gg;
+            }
+            else
+            {
+                return;
+            }
+
+            
         }
     }
 }
